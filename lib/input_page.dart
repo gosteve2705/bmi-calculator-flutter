@@ -14,6 +14,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class _InputPageState extends State<InputPage> {
         title: Center(child: Text('BMI CALCULATOR')),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -35,7 +37,7 @@ class _InputPageState extends State<InputPage> {
                     },
                     colour: selectedGender == Gender.male
                         ? kActiveCardColor
-                        : inActiveCardColor,
+                        : kInActiveCardColour,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
@@ -51,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                       },
                       colour: selectedGender == Gender.female
                           ? kActiveCardColor
-                          : inActiveCardColor,
+                          : kInActiveCardColour,
                       cardChild: IconContent(
                         icon: FontAwesomeIcons.venus,
                         label: 'FEMALE',
@@ -61,13 +63,54 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: kActiveCardColor),
+            child: ReusableCard(
+              colour: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    textBaseline: TextBaseline.alphabetic,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 80,
+                    max: 300,
+                    activeColor: Color(0xffeb1555),
+                    inactiveColor: Color(0xff8d8e98),
+                    onChanged: (double newValue) {
+                      setState(() {
+                        height = newValue.toInt();
+                      });
+                      print(newValue);
+                    },
+                  )
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: kActiveCardColor),
+                  child: ReusableCard(
+                    colour: kActiveCardColor,
+                  ),
                 ),
                 Expanded(
                   child: ReusableCard(colour: kActiveCardColor),
@@ -76,7 +119,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColour,
             height: kBottomContainerHeight,
             width: double.infinity,
             margin: EdgeInsets.only(top: 10),
