@@ -34,7 +34,7 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     colour: selectedGender == Gender.male
-                        ? activeCardColor
+                        ? kActiveCardColor
                         : inActiveCardColor,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
@@ -50,7 +50,7 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       colour: selectedGender == Gender.female
-                          ? activeCardColor
+                          ? kActiveCardColor
                           : inActiveCardColor,
                       cardChild: IconContent(
                         icon: FontAwesomeIcons.venus,
@@ -61,23 +61,23 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: activeCardColor),
+            child: ReusableCard(colour: kActiveCardColor),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: activeCardColor),
+                  child: ReusableCard(colour: kActiveCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(colour: activeCardColor),
+                  child: ReusableCard(colour: kActiveCardColor),
                 )
               ],
             ),
           ),
           Container(
             color: bottomContainerColor,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
             width: double.infinity,
             margin: EdgeInsets.only(top: 10),
           ),
