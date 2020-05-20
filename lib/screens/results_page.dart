@@ -2,10 +2,18 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'input_page.dart';
 import '../components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.bmiResult,
+      @required this.resultText,
+      @required this.interpretation});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +31,7 @@ class ResultsPage extends StatelessWidget {
                 style: kNumberTextStyle,
               ),
               padding: EdgeInsets.only(left: 20),
+              alignment: Alignment.bottomLeft,
             ),
           ),
           Expanded(
@@ -34,15 +43,15 @@ class ResultsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    'OVERWEIGHT',
+                    resultText,
                     style: kResultsStatusTextStyle,
                   ),
                   Text(
-                    '26.7',
+                    bmiResult,
                     style: kBMITextStyle,
                   ),
                   Text(
-                    'You have a higher than normal body weight. try to  exercise more',
+                    interpretation,
                     style: kResultsDescription,
                     textAlign: TextAlign.center,
                   )
@@ -53,12 +62,7 @@ class ResultsPage extends StatelessWidget {
           BottomButton(
             buttonTitle: 'RE-CALCULATE',
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InputPage(),
-                ),
-              );
+              Navigator.pop(context);
             },
           )
         ],
